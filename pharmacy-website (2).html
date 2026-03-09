@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthFirst Pharmacy — Your Trusted Health Partner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f7f3ee;
+      --warm-white: #fdfaf6;
+      --sage: #4a7c59;
+      --sage-light: #6a9c78;
+      --sage-pale: #e8f0ea;
+      --terracotta: #c4694f;
+      --terracotta-light: #e8896e;
+      --charcoal: #2a2a2a;
+      --mid: #5a5a5a;
+      --light: #9a9a9a;
+      --border: #e0d8cf;
+      --gold: #b8956a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 5%;
+      background: rgba(253,250,246,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 0.6rem;
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 38px; height: 38px;
+      background: var(--sage);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .logo-text { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; color: var(--charcoal); }
+    .logo-sub { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); font-weight: 500; display: block; margin-top: -2px; }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--mid); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--sage); }
+
+    .nav-cta {
+      background: var(--sage); color: #fff;
+      border: none; padding: 0.6rem 1.4rem;
+      border-radius: 100px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem; font-weight: 600;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--sage-light); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+      overflow: hidden;
+      background: var(--warm-white);
+    }
+
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6% 5% 6% 8%;
+      position: relative;
+    }
+    .hero-left::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=1200&auto=format&fit=crop') center/cover no-repeat;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--sage-pale); color: var(--sage);
+      border-radius: 100px; padding: 0.35rem 0.9rem;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; margin-bottom: 1.8rem;
+      width: fit-content;
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-badge::before { content: '●'; font-size: 0.5rem; }
+
+    .hero-h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .hero-h1 em { font-style: normal; color: var(--sage); }
+    .hero-h1 .accent { color: var(--terracotta); }
+
+    .hero-p {
+      font-size: 1.05rem; line-height: 1.7; color: var(--mid);
+      max-width: 440px; margin-bottom: 2.5rem;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex; gap: 1rem; align-items: center;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--sage); color: #fff;
+      padding: 0.85rem 2rem; border-radius: 100px;
+      font-size: 0.95rem; font-weight: 600;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(74,124,89,0.35);
+    }
+    .btn-primary:hover { background: var(--sage-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(74,124,89,0.4); }
+
+    .btn-secondary {
+      display: flex; align-items: center; gap: 0.5rem;
+      color: var(--charcoal); font-size: 0.95rem; font-weight: 500;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .btn-secondary:hover { color: var(--sage); }
+    .btn-secondary .arrow { font-size: 1.1rem; transition: transform 0.2s; }
+    .btn-secondary:hover .arrow { transform: translateX(4px); }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-top: 3.5rem;
+      padding-top: 2rem; border-top: 1px solid var(--border);
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+    .stat-num {
+      font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700;
+      color: var(--charcoal); display: block;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--light); font-weight: 500; }
+
+    .hero-right {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      animation: fadeIn 1s 0.2s ease both;
+      background-image: url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=900&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+    }
+    .hero-right::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(74,124,89,0.55) 0%, rgba(42,42,42,0.35) 100%);
+      z-index: 1;
+    }
+    .hero-right .hero-visual { position: relative; z-index: 2; }
+    .hero-right .hero-ring, .hero-right .hero-ring-2 { z-index: 1; border-color: rgba(255,255,255,0.12); }
+
+    .hero-visual {
+      width: 85%; max-width: 420px;
+      background: #fff;
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      position: relative; z-index: 2;
+    }
+    .hero-visual-title {
+      font-family: 'Fraunces', serif; font-size: 1.1rem;
+      margin-bottom: 1.2rem; color: var(--charcoal);
+    }
+
+    .rx-card {
+      background: var(--cream); border-radius: 14px; padding: 1rem 1.2rem;
+      margin-bottom: 0.75rem; display: flex; align-items: center; gap: 1rem;
+      border: 1px solid var(--border);
+      transition: transform 0.2s;
+    }
+    .rx-card:hover { transform: translateX(4px); }
+    .rx-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .rx-icon.green { background: var(--sage-pale); }
+    .rx-icon.orange { background: #fde8e2; }
+    .rx-icon.gold { background: #fdf3e2; }
+    .rx-info { flex: 1; }
+    .rx-name { font-weight: 600; font-size: 0.88rem; color: var(--charcoal); }
+    .rx-sub { font-size: 0.75rem; color: var(--light); margin-top: 1px; }
+    .rx-status {
+      font-size: 0.72rem; font-weight: 600; padding: 0.25rem 0.6rem;
+      border-radius: 100px; letter-spacing: 0.04em;
+    }
+    .rx-status.ready { background: #d4edda; color: #2d7a3e; }
+    .rx-status.pending { background: #fde8d0; color: #b86820; }
+
+    .hero-ring {
+      position: absolute; width: 500px; height: 500px;
+      border-radius: 50%; border: 60px solid rgba(74,124,89,0.07);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+    }
+    .hero-ring-2 {
+      position: absolute; width: 700px; height: 700px;
+      border-radius: 50%; border: 40px solid rgba(74,124,89,0.04);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      padding: 7rem 8%;
+      background: var(--warm-white);
+    }
+
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--sage); font-weight: 600; margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 600; line-height: 1.15; letter-spacing: -0.02em;
+      color: var(--charcoal); margin-bottom: 1rem;
+    }
+    .section-sub { font-size: 1rem; color: var(--mid); max-width: 500px; line-height: 1.7; }
+
+    .services-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 4rem; gap: 2rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--cream);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: default;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+    }
+    .service-card.featured {
+      background: var(--sage);
+      border-color: var(--sage);
+      color: #fff;
+    }
+    .service-card.featured .service-icon-wrap { background: rgba(255,255,255,0.15); }
+    .service-card.featured .service-title { color: #fff; }
+    .service-card.featured .service-desc { color: rgba(255,255,255,0.8); }
+    .service-card.featured .service-tag { background: rgba(255,255,255,0.2); color: #fff; }
+
+    .service-icon-wrap {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: var(--sage-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 1.4rem;
+    }
+    .service-title {
+      font-family: 'Fraunces', serif; font-size: 1.15rem;
+      font-weight: 600; color: var(--charcoal); margin-bottom: 0.6rem;
+    }
+    .service-desc { font-size: 0.875rem; color: var(--mid); line-height: 1.65; margin-bottom: 1.2rem; }
+    .service-tag {
+      display: inline-block;
+      background: var(--sage-pale); color: var(--sage);
+      font-size: 0.72rem; font-weight: 600;
+      padding: 0.3rem 0.7rem; border-radius: 100px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      padding: 7rem 8%;
+      background: linear-gradient(135deg, rgba(42,42,42,0.97), rgba(30,30,30,0.97)),
+                  url('https://images.unsplash.com/photo-1576671081837-49000212a370?w=1400&auto=format&fit=crop') center/cover no-repeat;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-visual {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    .about-img-card {
+      border-radius: 16px; overflow: hidden;
+      aspect-ratio: 3/4;
+      background: var(--sage);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      position: relative;
+    }
+    .about-img-card:nth-child(2) { margin-top: 2rem; background: #3d5a3e; }
+    .about-img-card:nth-child(3) { margin-top: -2rem; background: #c4694f; }
+    .about-img-card:nth-child(4) { background: var(--gold); }
+
+    .about-img-label {
+      position: absolute; bottom: 1rem; left: 1rem; right: 1rem;
+      background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);
+      color: #fff; font-size: 0.78rem; font-weight: 600;
+      padding: 0.5rem 0.7rem; border-radius: 8px;
+    }
+
+    .about-content .section-label { color: var(--sage-light); }
+    .about-content .section-title { color: #fff; }
+    .about-content .section-sub { color: rgba(255,255,255,0.65); }
+
+    .about-features { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.2rem; }
+    .about-feature {
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .feature-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--sage-light); flex-shrink: 0; margin-top: 6px;
+    }
+    .feature-text { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+    .feature-text strong { color: #fff; font-weight: 600; }
+
+    /* ── TEAM ── */
+    #team { padding: 7rem 8%; background: var(--cream); }
+    .team-header { text-align: center; margin-bottom: 4rem; }
+    .team-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .team-card {
+      background: #fff; border-radius: 20px; overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .team-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+    .team-photo {
+      height: 220px; display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; position: relative;
+    }
+    .team-photo.c1 { background: linear-gradient(135deg, #e8f0ea, #c8dccb); }
+    .team-photo.c2 { background: linear-gradient(135deg, #fde8e2, #f5c4b5); }
+    .team-photo.c3 { background: linear-gradient(135deg, #fdf3e2, #f0d8b0); }
+    .team-photo.c4 { background: linear-gradient(135deg, #e8eaf6, #c5cae9); }
+    .team-info { padding: 1.2rem 1.4rem; }
+    .team-name { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; color: var(--charcoal); }
+    .team-role { font-size: 0.8rem; color: var(--sage); font-weight: 500; margin-top: 2px; }
+    .team-bio { font-size: 0.8rem; color: var(--mid); margin-top: 0.5rem; line-height: 1.5; }
+
+    /* ── CONTACT ── */
+    #contact {
+      padding: 7rem 8%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info .section-title { margin-bottom: 1rem; }
+    .contact-info .section-sub { margin-bottom: 2.5rem; }
+
+    .contact-details { display: flex; flex-direction: column; gap: 1.2rem; }
+    .contact-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .contact-icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: var(--sage-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .contact-label { font-size: 0.75rem; color: var(--light); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+    .contact-value { font-size: 0.95rem; color: var(--charcoal); font-weight: 500; margin-top: 1px; }
+
+    .hours-table { margin-top: 2rem; }
+    .hours-title { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; margin-bottom: 0.8rem; }
+    .hours-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.875rem; }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-day { color: var(--mid); }
+    .hours-time { color: var(--charcoal); font-weight: 500; }
+    .hours-time.closed { color: var(--terracotta); }
+
+    .contact-form {
+      background: var(--cream); border-radius: 24px;
+      padding: 2.5rem; border: 1px solid var(--border);
+    }
+    .form-title { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 600; margin-bottom: 1.8rem; }
+
+    .form-group { margin-bottom: 1.2rem; }
+    .form-label { font-size: 0.8rem; font-weight: 600; color: var(--charcoal); letter-spacing: 0.04em; margin-bottom: 0.4rem; display: block; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; color: var(--charcoal);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--sage);
+      box-shadow: 0 0 0 3px rgba(74,124,89,0.12);
+    }
+    .form-textarea { resize: vertical; min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .form-submit {
+      width: 100%; padding: 0.9rem;
+      background: var(--sage); color: #fff;
+      border: none; border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; margin-top: 0.5rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .form-submit:hover { background: var(--sage-light); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      padding: 4rem 8% 2rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-brand .logo-text { color: #fff; }
+    .footer-desc { font-size: 0.875rem; line-height: 1.7; margin-top: 0.8rem; max-width: 260px; }
+    .footer-col-title { color: #fff; font-weight: 600; font-size: 0.875rem; margin-bottom: 1rem; letter-spacing: 0.04em; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--sage-light); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+    .footer-copy { color: rgba(255,255,255,0.4); }
+    .footer-legal { display: flex; gap: 1.5rem; }
+    .footer-legal a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ── CONSULTATION BANNER ── */
+    #consult {
+      background: linear-gradient(135deg, rgba(196,105,79,0.92), rgba(232,137,110,0.88)),
+                  url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1400&auto=format&fit=crop') center/cover no-repeat;
+      padding: 5rem 8%;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 3rem;
+    }
+    .consult-text .section-label { color: rgba(255,255,255,0.7); }
+    .consult-text .section-title { color: #fff; }
+    .consult-text .section-sub { color: rgba(255,255,255,0.85); max-width: 500px; margin-top: 0.5rem; }
+    .btn-white {
+      background: #fff; color: var(--terracotta);
+      padding: 0.85rem 2rem; border-radius: 100px;
+      font-size: 0.95rem; font-weight: 700;
+      text-decoration: none; white-space: nowrap;
+      transition: transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { display: none; }
+      .hero-left { padding: 3rem 6%; }
+      #about { grid-template-columns: 1fr; gap: 3rem; }
+      .about-visual { display: none; }
+      #contact { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .services-header { flex-direction: column; align-items: flex-start; }
+      #consult { flex-direction: column; text-align: center; }
+      .consult-text .section-sub { max-width: 100%; }
+    }
+
+    @media (max-width: 600px) {
+      nav .nav-links { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-mark">H</div>
+    <div>
+      <span class="logo-text">HealthFirst</span>
+      <span class="logo-sub">Pharmacy</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-badge">Trusted Since 1998</div>
+    <h1 class="hero-h1">Your health,<br><em>expertly</em><br>cared <span class="accent">for.</span></h1>
+    <p class="hero-p">HealthFirst Pharmacy combines modern pharmaceutical expertise with warm, personal service — making your health journey smoother every step of the way.</p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">Our Services</a>
+      <a href="#contact" class="btn-secondary">Find Us <span class="arrow">→</span></a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">25+</span>
+        <span class="stat-label">Years of Care</span>
+      </div>
+      <div>
+        <span class="stat-num">12K+</span>
+        <span class="stat-label">Happy Patients</span>
+      </div>
+      <div>
+        <span class="stat-num">98%</span>
+        <span class="stat-label">Satisfaction Rate</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-ring"></div>
+    <div class="hero-ring-2"></div>
+    <div class="hero-visual">
+      <div class="hero-visual-title">📋 Today's Prescriptions</div>
+      <div class="rx-card">
+        <div class="rx-icon green">💊</div>
+        <div class="rx-info">
+          <div class="rx-name">Metformin 500mg</div>
+          <div class="rx-sub">Dr. Sarah Ochieng · 30 tablets</div>
+        </div>
+        <span class="rx-status ready">Ready</span>
+      </div>
+      <div class="rx-card">
+        <div class="rx-icon orange">🩺</div>
+        <div class="rx-info">
+          <div class="rx-name">Amoxicillin 250mg</div>
+          <div class="rx-sub">Dr. James Mwangi · 21 capsules</div>
+        </div>
+        <span class="rx-status pending">In Progress</span>
+      </div>
+      <div class="rx-card">
+        <div class="rx-icon gold">🌿</div>
+        <div class="rx-info">
+          <div class="rx-name">Vitamin D3 1000IU</div>
+          <div class="rx-sub">Over-the-counter · 60 softgels</div>
+        </div>
+        <span class="rx-status ready">Ready</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title">Comprehensive<br>pharmacy services</h2>
+    </div>
+    <p class="section-sub">From filling prescriptions to health consultations, we're here to support every aspect of your wellbeing.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card featured">
+      <div class="service-icon-wrap">💊</div>
+      <div class="service-title">Prescription Dispensing</div>
+      <p class="service-desc">Fast, accurate prescription filling with thorough medication checks and clear patient guidance.</p>
+      <span class="service-tag">Core Service</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon-wrap">🩺</div>
+      <div class="service-title">Health Consultations</div>
+      <p class="service-desc">One-on-one sessions with our licensed pharmacists to review your medications and health goals.</p>
+      <span class="service-tag">Free Service</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon-wrap">🚚</div>
+      <div class="service-title">Home Delivery</div>
+      <p class="service-desc">Same-day and next-day delivery of prescriptions and health products straight to your door.</p>
+      <span class="service-tag">Available Now</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon-wrap">💉</div>
+      <div class="service-title">Vaccinations</div>
+      <p class="service-desc">Flu shots, travel vaccines, and routine immunizations administered by our trained staff.</p>
+      <span class="service-tag">Walk-In Welcome</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon-wrap">🧪</div>
+      <div class="service-title">Health Screenings</div>
+      <p class="service-desc">Blood pressure, glucose, cholesterol, and BMI checks — quick and confidential.</p>
+      <span class="service-tag">No Appointment</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon-wrap">🌱</div>
+      <div class="service-title">Compounding</div>
+      <p class="service-desc">Custom-formulated medications tailored to unique patient needs and preferences.</p>
+      <span class="service-tag">Specialized</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual">
+    <div class="about-img-card" style="background:url('https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=600&auto=format&fit=crop') center/cover"><div class="about-img-label">Our Dispensary</div></div>
+    <div class="about-img-card" style="background:url('https://images.unsplash.com/photo-1550831107-1553da8c8464?w=600&auto=format&fit=crop') center/cover;margin-top:1.5rem"><div class="about-img-label">Medication Safety</div></div>
+    <div class="about-img-card" style="background:url('https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=600&auto=format&fit=crop') center/cover"><div class="about-img-label">Patient Care</div></div>
+    <div class="about-img-card" style="background:url('https://images.unsplash.com/photo-1603555501671-8f96b3fce8b5?w=600&auto=format&fit=crop') center/cover"><div class="about-img-label">Compounding Lab</div></div>
+  </div>
+  <div class="about-content">
+    <div class="section-label">Our Story</div>
+    <h2 class="section-title">Built on trust,<br>driven by care</h2>
+    <p class="section-sub">For over 25 years, HealthFirst Pharmacy has been a cornerstone of community healthcare in Nairobi — combining clinical expertise with genuine compassion.</p>
+    <div class="about-features">
+      <div class="about-feature">
+        <div class="feature-dot"></div>
+        <div class="feature-text"><strong>Qualified Pharmacists:</strong> All our staff hold recognized pharmaceutical qualifications and undergo continuous professional development.</div>
+      </div>
+      <div class="about-feature">
+        <div class="feature-dot"></div>
+        <div class="feature-text"><strong>Safe & Accredited:</strong> Fully licensed by the Pharmacy & Poisons Board with strict quality controls across all products.</div>
+      </div>
+      <div class="about-feature">
+        <div class="feature-dot"></div>
+        <div class="feature-text"><strong>Community-Focused:</strong> We partner with local clinics and hospitals to ensure seamless, coordinated care for every patient.</div>
+      </div>
+      <div class="about-feature">
+        <div class="feature-dot"></div>
+        <div class="feature-text"><strong>Modern & Accessible:</strong> Digital prescription management, home delivery, and extended hours make healthcare easier for everyone.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="team-header">
+    <div class="section-label">Meet the Team</div>
+    <h2 class="section-title">Experts you can trust</h2>
+    <p class="section-sub" style="max-width:460px;margin:0.5rem auto 0;">Our dedicated team of pharmacists and healthcare professionals is here to guide you.</p>
+  </div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-photo c1">👩‍⚕️</div>
+      <div class="team-info">
+        <div class="team-name">Dr. Amina Hassan</div>
+        <div class="team-role">Lead Pharmacist & Founder</div>
+        <div class="team-bio">25 years experience in clinical pharmacy. Specialist in chronic disease management.</div>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo c2">👨‍⚕️</div>
+      <div class="team-info">
+        <div class="team-name">James Odhiambo</div>
+        <div class="team-role">Clinical Pharmacist</div>
+        <div class="team-bio">Expert in medication therapy management and patient counseling.</div>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo c3">👩‍🔬</div>
+      <div class="team-info">
+        <div class="team-name">Grace Wanjiku</div>
+        <div class="team-role">Compounding Specialist</div>
+        <div class="team-bio">Trained in sterile and non-sterile compounding with 10 years experience.</div>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo c4">👨‍💼</div>
+      <div class="team-info">
+        <div class="team-name">Samuel Kipchoge</div>
+        <div class="team-role">Dispensary Manager</div>
+        <div class="team-bio">Ensures smooth operations, stock quality, and exceptional customer service.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSULT BANNER -->
+<section id="consult">
+  <div class="consult-text">
+    <div class="section-label">Free Service</div>
+    <h2 class="section-title">Need medication advice?</h2>
+    <p class="section-sub">Book a free 15-minute consultation with one of our pharmacists — no appointment needed for walk-ins.</p>
+  </div>
+  <a href="#contact" class="btn-white">Book a Consultation →</a>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-info">
+    <div class="section-label">Find Us</div>
+    <h2 class="section-title">Visit or reach out<br>anytime</h2>
+    <p class="section-sub">We're conveniently located and always happy to help — in store, by phone, or online.</p>
+    <div class="contact-details" style="margin-top:2rem;">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Westlands Square, Waiyaki Way<br>Nairobi, Kenya</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+254 700 123 456</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bed6dbd2d2d1fed6dbdfd2cad6d8d7cccdcaccc690ddd190d5db">[email&#160;protected]</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="hours-table">
+      <div class="hours-title">Opening Hours</div>
+      <div class="hours-row"><span class="hours-day">Monday – Friday</span><span class="hours-time">8:00 AM – 8:00 PM</span></div>
+      <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">9:00 AM – 6:00 PM</span></div>
+      <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">10:00 AM – 4:00 PM</span></div>
+      <div class="hours-row"><span class="hours-day">Public Holidays</span><span class="hours-time closed">Closed</span></div>
+    </div>
+  </div>
+
+  <div class="contact-form">
+    <div class="form-title">Send us a message</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">First Name</label>
+        <input class="form-input" type="text" placeholder="John" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Last Name</label>
+        <input class="form-input" type="text" placeholder="Doe" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input class="form-input" type="email" placeholder="john@example.com" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone Number</label>
+      <input class="form-input" type="tel" placeholder="+254 700 000 000" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Subject</label>
+      <select class="form-select">
+        <option value="">Select a topic…</option>
+        <option>Prescription Enquiry</option>
+        <option>Health Consultation</option>
+        <option>Home Delivery</option>
+        <option>Compounding Service</option>
+        <option>General Enquiry</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Message</label>
+      <textarea class="form-textarea" placeholder="How can we help you?"></textarea>
+    </div>
+    <button class="form-submit" onclick="this.textContent='Message Sent ✓'; this.style.background='#2d7a3e'; setTimeout(()=>{this.textContent='Send Message'; this.style.background='';},3000)">Send Message</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">
+        <div class="logo-mark">H</div>
+        <div>
+          <span class="logo-text">HealthFirst</span>
+          <span class="logo-sub" style="color:var(--sage-light)">Pharmacy</span>
+        </div>
+      </div>
+      <p class="footer-desc">Your trusted community pharmacy, providing expert care and quality medicines since 1998.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Prescriptions</a></li>
+        <li><a href="#services">Consultations</a></li>
+        <li><a href="#services">Home Delivery</a></li>
+        <li><a href="#services">Vaccinations</a></li>
+        <li><a href="#services">Compounding</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#team">Our Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Health Info</div>
+      <ul class="footer-links">
+        <li><a href="#">Drug Interactions</a></li>
+        <li><a href="#">Dosage Guides</a></li>
+        <li><a href="#">Health Tips</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 HealthFirst Pharmacy. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Smooth scroll + scroll-reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .team-card, .contact-item, .about-feature').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+
+  // Active nav link
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.
